@@ -1,24 +1,24 @@
 {
-  "name": "snow-keepalive",
+  "name": "prevent-sleep-snow",
   "version": "1.0.0",
-  "description": "Keep SNOW dev instances alive",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/digitalbs/snow-keepalive.git"
+    "url": "git+https://github.com/viniciussilverio/prevent-sleep-snow.git"
   },
-  "author": "Brian Schneider <schneid.brian@gmail.com>",
-  "license": "MIT",
+  "author": "vinos.vinicius@gmail.com",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/digitalbs/snow-keepalive/issues"
+    "url": "https://github.com/viniciussilverio/prevent-sleep-snow/issues"
   },
-  "homepage": "https://github.com/digitalbs/snow-keepalive#readme",
+  "homepage": "https://github.com/viniciussilverio/prevent-sleep-snow#readme",
   "dependencies": {
-    "casperjs": "^1.1.4",
     "dotenv": "^8.0.0",
-    "phantomjs-prebuilt": "^2.1.16"
+    "express": "^4.17.1",
+    "request": "^2.88.0"
   }
 }

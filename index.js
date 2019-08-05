@@ -1,28 +1,34 @@
+const express = require('express');
+const app = express();
 require('dotenv').config()
+var request = require('request');
 
-var casper = require('casper').create({
-    verbose: false,
-    logLevel: "error"
+const port = process.env.PORT;
+
+app.listen(port, function () {
+    console.log(`http://localhost:${port}`);
 });
 
-var config = {
-    "username": process.env.username,
-    "password": process.env.password,
-    "url": process.env.url
+var options = {
+    url: `${process.env.url}/api/now/table/incident`,
+    method: 'POST',
+    headers: { "Accept": "application/json", "Content-Type": "application/json", "Authorization": ("Basic " + new Buffer(`${process.env.username}:${process.env.password}`).toString('base64')) },
+    json: true,
+    body: { 'short_description': 'Sonékito', 'assignment_group': '287ebd7da9fe198100f92cc8d1d2154e', 'urgency': '3', 'impact': '3' }
 };
 
-casper.start(config.url + '/welcome.do');
-casper.then(function () {
-    this.wait(5000, function () {
-        this.echo('Page: ' + this.getTitle());
-        this.sendKeys('form#loginPage input#user_name', config.username);
-        this.sendKeys('input#user_password', config.password);
-        this.click('button#sysverb_login');
-    });
-    this.wait(5000, function () {
-        this.echo('Page: ' + this.getTitle());
-        //this.echo('Page: ' + this.getPageContent());
-    });
-});
+function callback(error, response, body) {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log(body);
+    }
+}
 
-casper.run();
+setInterval(function () {
+    try {
+        request(options, callback);
+    } catch (error) {
+        console.log(error);
+    }
+}, 5 * 60 * 1000);
